@@ -83,7 +83,7 @@ const [email] = defineField('email')
 
 const onSubmit = handleSubmit(async (values) => {
     await (() =>
-        new Promise((resolve) => setTimeout(resolve, Math.random() * 2000)))()
+        new Promise((resolve) => setTimeout(resolve, Math.random() * 5000)))()
 
     console.log(values)
 })

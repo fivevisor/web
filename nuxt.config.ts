@@ -8,21 +8,12 @@ export default defineNuxtConfig({
         }
     },
     modules: [
-        '@nuxtjs/tailwindcss',
-        '@vee-validate/nuxt',
-        '@nuxt/icon',
-        '@prisma/nuxt',
-        [
-            'nuxt-nodemailer',
-            {
-                service: 'Gmail',
-                auth: {
-                    user: 'yigitgurses2019@gmail.com',
-                    pass: 'yfkc lhzk juoy urej'
-                }
-            }
-        ],
-        'nuxt-cron'
+      '@nuxtjs/tailwindcss',
+      '@vee-validate/nuxt',
+      '@nuxt/icon',
+      '@prisma/nuxt',
+      'nuxt-cron',
+      'nuxt-resend'
     ],
     css: ['~/assets/css/main.css']
 })

@@ -33,14 +33,15 @@ export default defineEventHandler(async (event) => {
         '30m'
     )
 
-    const { sendMail } = useNodeMailer()
+    const { emails } = useResend()
 
-    await sendMail({
+    await emails.send({
+        from: 'Fivevisor <noreply@fivevisor.com>',
+        to: body.email,
         subject: 'Verify Your Account',
         text: `${
             getRequestURL(event).origin
-        }/auth/verification?token=${verificationToken}`,
-        to: body.email
+        }/auth/verification?token=${verificationToken}`
     })
 
     return {

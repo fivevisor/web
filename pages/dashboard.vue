@@ -11,6 +11,6 @@ useHead({
 
 await(
     async () =>
-        new Promise((resolve) => setTimeout(resolve, Math.random() * 2000))
+        new Promise((resolve) => setTimeout(resolve, Math.random() * 5000))
 )()
 </script>

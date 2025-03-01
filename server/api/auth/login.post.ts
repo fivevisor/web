@@ -27,14 +27,15 @@ export default defineEventHandler(async (event) => {
 
     const redirectToken = await token.generate('Redirect', body.email, '5m')
 
-    const { sendMail } = useNodeMailer()
+    const { emails } = useResend()
 
-    await sendMail({
+    await emails.send({
+        from: 'Fivevisor <noreply@fivevisor.com>',
+        to: body.email,
         subject: 'Login Your Account',
         text: `${
             getRequestURL(event).origin
-        }/auth/redirect?token=${redirectToken}`,
-        to: body.email
+        }/auth/redirect?token=${redirectToken}`
     })
 
     return {
