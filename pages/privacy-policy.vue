@@ -1,12 +1,12 @@
 <template>
-    <div>
-        <h1>VIEW</h1>
+    <div class="h-full flex items-center justify-center">
+        <h1 class="text-4xl text-white font-semibold">PRIVACY POLICY</h1>
     </div>
 </template>
 
 <script lang="ts" setup>
 useHead({
-    title: '/view'
+    title: '/privacy-policy'
 })
 
 await(

@@ -1,10 +1,24 @@
 <template>
-    <div>
-        <h1>HOME</h1>
-        <div>
-            <h1>count: {{ count }}</h1>
-            <button @click="count++">Add Count</button>
-            <button @click="count = 0">Reset</button>
+    <div class="h-full flex items-center justify-center">
+        <div class="w-72 flex flex-col gap-y-5">
+            <div class="flex flex-col items-center">
+                <h1 class="text-4xl text-white font-semibold">FIVEVISOR</h1>
+                <p class="text-center text-sm text-zinc-400">
+                    A user-friendly dashboard for your FiveM server.
+                </p>
+            </div>
+            <button
+                @click="
+                    send({
+                        type: 'error',
+                        duration: 3000,
+                        message: 'This feature is currently not active.'
+                    })
+                "
+                class="py-2 px-4 text-sm text-white bg-amber-600 rounded-md transition hover:bg-amber-800"
+            >
+                Get Started
+            </button>
         </div>
     </div>
 </template>
@@ -14,10 +28,5 @@ useHead({
     title: '/'
 })
 
-await(
-    async () =>
-        new Promise((resolve) => setTimeout(resolve, Math.random() * 5000))
-)()
-
-const count = ref<number>(0)
+const { send } = useToast()
 </script>

@@ -1,14 +1,12 @@
 <template>
-    <div>
-        <div>
-            <h1>Test Project</h1>
-            <div>
-                <NuxtLink to="/">Home</NuxtLink>
-                <NuxtLink to="/view">View</NuxtLink>
+    <div class="h-screen flex flex-col">
+        <Header />
+        <div class="flex-1">
+            <slot />
+            <div class="absolute bottom-10 right-10">
+                <ToastList />
             </div>
         </div>
-        <div>
-            <slot />
-        </div>
+        <Footer />
     </div>
 </template>
