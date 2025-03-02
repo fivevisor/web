@@ -10,5 +10,14 @@
 </template>
 
 <script lang="ts" setup>
+useHead({
+    title: '/'
+})
+
+await(
+    async () =>
+        new Promise((resolve) => setTimeout(resolve, Math.random() * 5000))
+)()
+
 const count = ref<number>(0)
 </script>
