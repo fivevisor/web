@@ -1,4 +1,4 @@
-![Banner](https://i.imgur.com/XK1kOpJ.png)
+![Banner](https://fivevisor.com/files/github_banner.png)
 
 # Official Website
 
