@@ -6,7 +6,7 @@
             <NuxtLink to="/">
                 <Brand :size="128" />
             </NuxtLink>
-            <div class="flex gap-x-2">
+            <div class="flex">
                 <div
                     :style="indicatorOptions"
                     class="absolute h-9 bg-zinc-800 rounded-full transition-all"
@@ -87,7 +87,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.router-link-exact-active {
+/* .router-link-exact-active {
     @apply text-white;
-}
+} */
 </style>

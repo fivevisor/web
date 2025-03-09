@@ -7,13 +7,22 @@ export default defineNuxtConfig({
             titleTemplate: 'Fivevisor - %s'
         }
     },
-    modules: ['@nuxtjs/tailwindcss', [
-        '@nuxtjs/google-fonts',
-        {
-            families: {
-                Saira: '100..900'
+    modules: [
+        '@nuxtjs/tailwindcss',
+        [
+            '@nuxtjs/google-fonts',
+            {
+                families: {
+                    Saira: '100..900'
+                }
             }
-        }
-    ], '@nuxt/icon', '@vee-validate/nuxt', '@prisma/nuxt', 'nuxt-cron', 'nuxt-resend', '@vue-email/nuxt'],
+        ],
+        '@nuxt/icon',
+        '@vee-validate/nuxt',
+        '@prisma/nuxt',
+        'nuxt-cron',
+        '@vue-email/nuxt',
+        'nuxt-resend'
+    ],
     css: ['~/assets/css/main.css']
 })
