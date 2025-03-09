@@ -23,6 +23,7 @@
         "@prisma/nuxt": "^0.3.0",
         "@vee-validate/nuxt": "^4.15.0",
         "@vee-validate/yup": "^4.15.0",
+        "@vue-email/nuxt": "^0.8.19",
         "nuxt-cron": "^1.8.0",
         "nuxt-resend": "^0.0.2",
         "prisma": "6.4.1",

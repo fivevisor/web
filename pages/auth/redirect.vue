@@ -12,6 +12,26 @@
 
 <script lang="ts" setup>
 useHead({
-    title: '/auth/verification'
+    title: 'Redirecting...'
+})
+
+onMounted(async () => {
+    const token = useRoute().query.token
+
+    if (!token || typeof token !== 'string') {
+        useToast().add({
+            type: 'error',
+            message: 'Redirect token not found.',
+            duration: 3000
+        })
+
+        return
+    }
+
+    const success = await useAuth().redirect(token)
+
+    if (success) {
+        await useRouter().push('/dashboard')
+    }
 })
 </script>

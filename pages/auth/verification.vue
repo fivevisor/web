@@ -12,6 +12,26 @@
 
 <script lang="ts" setup>
 useHead({
-    title: '/auth/verification'
+    title: 'Verifying...'
+})
+
+onMounted(async () => {
+    const token = useRoute().query.token
+
+    if (!token || typeof token !== 'string') {
+        useToast().add({
+            type: 'error',
+            message: 'Verification token not found.',
+            duration: 3000
+        })
+
+        return
+    }
+
+    const success = await useAuth().verification(token)
+
+    if (success) {
+        await useRouter().push('/auth/login')
+    }
 })
 </script>

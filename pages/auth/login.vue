@@ -46,13 +46,13 @@
             <p class="text-center text-sm text-zinc-400">
                 By clicking continue, you agree to our
                 <NuxtLink
-                    to="/terms-of-service"
+                    to="/legal/terms-of-service"
                     class="underline transition hover:text-white"
                     >Terms of Service</NuxtLink
                 >
                 &
                 <NuxtLink
-                    to="/privacy-policy"
+                    to="/legal/privacy-policy"
                     class="underline transition hover:text-white"
                     >Privacy Policy</NuxtLink
                 >.
@@ -65,7 +65,7 @@
 import * as yup from 'yup'
 
 useHead({
-    title: '/auth/login'
+    title: 'Login'
 })
 
 const schema = yup.object({
@@ -82,9 +82,10 @@ const { defineField, handleSubmit, isSubmitting, errors, meta } = useForm({
 const [email] = defineField('email')
 
 const onSubmit = handleSubmit(async (values) => {
-    await (() =>
-        new Promise((resolve) => setTimeout(resolve, Math.random() * 5000)))()
+    const success = await useAuth().login(values.email)
 
-    console.log(values)
+    if (success) {
+        await useRouter().push('/')
+    }
 })
 </script>

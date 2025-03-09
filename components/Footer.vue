@@ -10,12 +10,12 @@
         </p>
         <div class="flex gap-x-5">
             <NuxtLink
-                to="/terms-of-service"
+                to="/legal/terms-of-service"
                 class="text-sm text-zinc-400 underline transition hover:text-white"
                 >Terms of Service</NuxtLink
             >
             <NuxtLink
-                to="/privacy-policy"
+                to="/legal/privacy-policy"
                 class="text-sm text-zinc-400 underline transition hover:text-white"
                 >Privacy Policy</NuxtLink
             >

@@ -14,6 +14,6 @@ export default defineNuxtConfig({
                 Saira: '100..900'
             }
         }
-    ], '@nuxt/icon', '@vee-validate/nuxt', '@prisma/nuxt', 'nuxt-cron', 'nuxt-resend'],
+    ], '@nuxt/icon', '@vee-validate/nuxt', '@prisma/nuxt', 'nuxt-cron', 'nuxt-resend', '@vue-email/nuxt'],
     css: ['~/assets/css/main.css']
 })

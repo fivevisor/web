@@ -1,14 +1,9 @@
-interface Toast {
-    id: number
-    type: 'inform' | 'success' | 'error'
-    duration: number
-    message: string
-}
+import type { Toast } from '~/types/global'
 
 export default () => {
     const list = useState<Toast[]>('list', () => [])
 
-    const send = (data: Omit<Toast, 'id'>) => {
+    const add = (data: Omit<Toast, 'id'>) => {
         let id: number
 
         do {
@@ -16,16 +11,17 @@ export default () => {
         } while (list.value.find((value) => id === value.id))
 
         list.value.push({ id, ...data })
+    }
 
-        setTimeout(() => {
-            const index = list.value.findIndex((value) => id === value.id)
+    const remove = (id: number) => {
+        const index = list.value.findIndex((value) => id === value.id)
 
-            list.value.splice(index, 1)
-        }, data.duration)
+        list.value.splice(index, 1)
     }
 
     return {
         list,
-        send
+        add,
+        remove
     }
 }

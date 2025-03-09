@@ -14,22 +14,52 @@ const schema = yup.object({
 })
 
 export default defineEventHandler(async (event) => {
-    const body = await readBody(event)
-
-    const user = await prisma.user.findUnique({
-        where: { email: body.email }
-    })
-
-    if (user) {
+    if (event.context.session) {
         return {
             success: false,
-            message: 'E-mail address already exist.'
+            message: 'Already have an active session.'
+        }
+    }
+
+    const body = await readBody(event)
+    const bodyValidation = await schema
+        .validate(body)
+        .then(() => ({ valid: true }))
+        .catch((err) => ({ valid: false, errors: err.errors }))
+
+    if (!bodyValidation.valid && 'errors' in bodyValidation) {
+        return {
+            success: false,
+            message: bodyValidation.errors.join(' ')
+        }
+    }
+
+    const existingUser = await prisma.user.findFirst({
+        where: {
+            OR: [{ username: body.username }, { email: body.email }]
+        }
+    })
+
+    if (existingUser) {
+        if (body.username === existingUser.username) {
+            return {
+                success: false,
+                message: 'Username already exist.'
+            }
+        } else if (body.email === existingUser.email) {
+            return {
+                success: false,
+                message: 'E-mail address already exist.'
+            }
         }
     }
 
     const verificationToken = await token.generate(
         'Verification',
-        body.email,
+        {
+            username: body.username,
+            email: body.email
+        },
         '30m'
     )
 

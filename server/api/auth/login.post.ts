@@ -10,22 +10,46 @@ const schema = yup.object({
 })
 
 export default defineEventHandler(async (event) => {
-    const body = await readBody(event)
+    if (event.context.session) {
+        return {
+            success: false,
+            message: 'Already have an active session.'
+        }
+    }
 
-    const user = await prisma.user.findUnique({
+    const body = await readBody(event)
+    const bodyValidation = await schema
+        .validate(body)
+        .then(() => ({ valid: true }))
+        .catch((err) => ({ valid: false, errors: err.errors }))
+
+    if (!bodyValidation.valid && 'errors' in bodyValidation) {
+        return {
+            success: false,
+            message: bodyValidation.errors.join(' ')
+        }
+    }
+
+    const existingUser = await prisma.user.findUnique({
         where: {
             email: body.email
         }
     })
 
-    if (!user) {
+    if (!existingUser) {
         return {
             success: false,
             message: 'E-mail address not exist.'
         }
     }
 
-    const redirectToken = await token.generate('Redirect', body.email, '5m')
+    const redirectToken = await token.generate(
+        'Redirect',
+        {
+            email: body.email
+        },
+        '5m'
+    )
 
     const { emails } = useResend()
 

@@ -1,6 +1,11 @@
 import { v4 } from 'uuid'
 import prisma from './prisma'
-import type { TokenType } from '@prisma/client'
+import { TokenType } from '@prisma/client'
+
+interface TokenPayload {
+    email: string
+    [key: string]: unknown
+}
 
 const parseDurationToMs = (duration: string): number => {
     let total = 0
@@ -29,9 +34,11 @@ const parseDurationToMs = (duration: string): number => {
 
 const generate = async (
     type: TokenType,
-    email: string,
+    payload: TokenPayload,
     expiresIn: string
 ): Promise<string> => {
+    const { email, ...payloadWithoutEmail } = payload
+
     await prisma.token.deleteMany({
         where: { type, email }
     })
@@ -52,6 +59,7 @@ const generate = async (
         data: {
             type,
             email,
+            payload: JSON.parse(JSON.stringify(payloadWithoutEmail)),
             identifier,
             expiresAt: new Date(Date.now() + parseDurationToMs(expiresIn))
         }
@@ -60,18 +68,31 @@ const generate = async (
     return identifier
 }
 
-const resolve = async (identifier: string): Promise<undefined | string> => {
+const resolve = async <T = any>(identifier: string): Promise<null | T> => {
     const token = await prisma.token.findUnique({
         where: { identifier }
     })
 
-    if (token && token.expiresAt > new Date()) {
-        await prisma.token.delete({
-            where: { identifier }
-        })
+    if (token) {
+        if (token.expiresAt > new Date()) {
+            if (token.type !== TokenType.Session) {
+                await prisma.token.delete({
+                    where: { identifier }
+                })
+            }
 
-        return token.email
+            return {
+                email: token.email,
+                ...JSON.parse(JSON.stringify(token.payload))
+            }
+        } else {
+            await prisma.token.delete({
+                where: { identifier }
+            })
+        }
     }
+
+    return null
 }
 
 export default {

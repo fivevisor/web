@@ -2,14 +2,16 @@
     <div class="h-full flex items-center justify-center">
         <div class="w-72 flex flex-col gap-y-5">
             <div class="flex flex-col items-center">
-                <h1 class="text-4xl text-white font-semibold">FIVEVISOR</h1>
+                <h1 class="text-4xl text-white">
+                    FIVE<span class="font-semibold">VISOR</span>
+                </h1>
                 <p class="text-center text-sm text-zinc-400">
                     A user-friendly dashboard for your FiveM server.
                 </p>
             </div>
             <button
                 @click="
-                    send({
+                    add({
                         type: 'error',
                         duration: 3000,
                         message: 'This feature is currently not active.'
@@ -25,8 +27,13 @@
 
 <script lang="ts" setup>
 useHead({
-    title: '/'
+    title: 'A User Friendly Dashboard for Your FiveM Server'
 })
 
-const { send } = useToast()
+const { add } = useToast()
+
+await(
+    async () =>
+        new Promise((resolve) => setTimeout(resolve, Math.random() * 2000))
+)()
 </script>

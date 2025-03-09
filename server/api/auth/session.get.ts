@@ -1,32 +1,14 @@
-import token from '~/lib/token'
-import prisma from '~/lib/prisma'
-
 export default defineEventHandler(async (event) => {
-    const sessionToken = getCookie(event, 'session_token')
-
-    if (!sessionToken) {
+    if (!event.context.session) {
         return {
-            success: false,
-            message: 'Session token not found.'
+            success: true,
+            message: 'Session not found.'
         }
     }
-
-    const email = await token.resolve(sessionToken)
-
-    if (!email) {
-        return {
-            success: false,
-            message: 'Session token not valid.'
-        }
-    }
-
-    const user = await prisma.user.findUnique({
-        where: { email }
-    })
 
     return {
         success: true,
         message: 'Session was successfully found.',
-        data: user
+        data: event.context.session
     }
 })

@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -20,6 +20,7 @@ model Token {
   id         Int       @id @default(autoincrement())
   type       TokenType
   email      String
+  payload    Json
   identifier String    @unique
   createdAt  DateTime  @default(now())
   expiresAt  DateTime
@@ -28,6 +29,7 @@ model Token {
 }
 
 model User {
-  id    Int    @id @default(autoincrement())
-  email String @unique
+  id       Int    @id @default(autoincrement())
+  username String @unique
+  email    String @unique
 }

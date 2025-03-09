@@ -6,11 +6,11 @@
 
 <script lang="ts" setup>
 useHead({
-    title: '/terms-of-service'
+    title: 'Terms of Service'
 })
 
 await(
     async () =>
-        new Promise((resolve) => setTimeout(resolve, Math.random() * 5000))
+        new Promise((resolve) => setTimeout(resolve, Math.random() * 2000))
 )()
 </script>
