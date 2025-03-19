@@ -19,7 +19,8 @@ jobs:
                   script: |
                       cd /opt/web
                       git pull origin main
-                      docker build -t web .
                       docker stop web || true
                       docker rm web || true
+                      docker rmi web || true
+                      docker build -t web .
                       docker run -d --name web --network=host web
