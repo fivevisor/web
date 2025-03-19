@@ -6,7 +6,7 @@ const PORT = 3000
 app.use(express.json())
 
 app.get('/', (req, res) => {
-    res.send('Hello, Express!')
+    res.send('Hello, Express! 31')
 })
 app.get('/user/:name', (req, res) => {
     res.send(`Hello, ${req.params.name}!`)
