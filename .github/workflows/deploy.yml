@@ -23,4 +23,4 @@ jobs:
                       docker rm web || true
                       docker rmi web || true
                       docker build -t web .
-                      docker run -d --name web --network=host web
+                      docker run -d --name web -p 3000:3000 web
