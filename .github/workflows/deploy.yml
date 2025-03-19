@@ -19,5 +19,5 @@ jobs:
                   script: |
                       cd /opt/web
                       git pull origin main
-                      docker-compose down
-                      docker-compose up -d --build
+                      docker-compose stop web
+                      docker-compose up -d --build web
