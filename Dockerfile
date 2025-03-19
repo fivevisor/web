@@ -2,9 +2,7 @@ FROM node:latest
 
 COPY . .
 
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN npm install
+RUN npm run build
 
-RUN pnpm install
-RUN pnpm build
-
-CMD ['pnpm', 'preview']
+CMD ['npm', 'run', 'preview']
