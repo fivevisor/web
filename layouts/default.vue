@@ -1,12 +1,9 @@
 <template>
     <div class="h-screen flex flex-col">
-        <Header />
+        <DefaultHeader />
         <div class="flex-1">
             <slot />
-            <div class="absolute bottom-10 right-10">
-                <ToastList />
-            </div>
         </div>
-        <Footer />
+        <DefaultFooter />
     </div>
 </template>

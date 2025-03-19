@@ -2,27 +2,22 @@
 export default defineNuxtConfig({
     compatibilityDate: '2024-11-01',
     devtools: { enabled: true },
-    app: {
-        head: {
-            titleTemplate: 'Fivevisor - %s'
-        }
-    },
     modules: [
+        '@nuxt/eslint',
         '@nuxtjs/tailwindcss',
         [
-            '@nuxtjs/google-fonts',
+            '@nuxt/fonts',
             {
-                families: {
-                    Saira: '100..900'
-                }
+                families: [{ name: 'Saira', provider: 'google' }]
             }
         ],
         '@nuxt/icon',
-        '@vee-validate/nuxt',
-        '@prisma/nuxt',
-        'nuxt-cron',
-        '@vue-email/nuxt',
-        'nuxt-resend'
+        [
+            '@nuxt/image',
+            {
+                provider: 'ipx'
+            }
+        ]
     ],
     css: ['~/assets/css/main.css']
 })

@@ -1,8 +1,0 @@
-{
-    "rewrites": [
-        {
-            "source": "/files/:path*",
-            "destination": "https://bpwvmrefwsvg90em.public.blob.vercel-storage.com/:path*"
-        }
-    ]
-}
