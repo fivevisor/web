@@ -19,5 +19,7 @@ jobs:
                   script: |
                       cd /opt/web
                       git pull origin main
-                      docker-compose stop web
-                      docker-compose up -d --build web
+                      docker build -t web .
+                      docker stop web || true
+                      docker rm web || true
+                      docker run -d --name web --network=host web
