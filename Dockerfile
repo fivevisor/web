@@ -2,6 +2,6 @@ FROM node:latest
 
 COPY . .
 
-RUN npm install
+RUN npm install --ignore-scripts
 
 CMD ["npm", "run", "start"]
